@@ -169,7 +169,7 @@ function RecipeView({ recipe }) {
               <button
                 type="button"
                 onClick={addNeedsToList}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-palm px-5 py-3 font-bold text-white hover:brightness-110 dark:text-[#1b1206]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-palm-ink px-5 py-3 font-bold text-white hover:brightness-110 dark:text-[#1b1206]"
               >
                 <Icon name="basket" /> Add {need.length} to shopping list
               </button>

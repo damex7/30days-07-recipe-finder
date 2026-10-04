@@ -17,8 +17,8 @@
   --color-panel: #fffaf1; /* cards */
   --color-panel-2: #f3e7d2; /* recessed: inputs, hover, skeletons */
   --color-ink: #1b1d3a; /* main text: indigo-black */
-  --color-ink-soft: #4a4a66; /* secondary text (8.4:1 on panel) */
-  --color-ink-faint: #6b6a80; /* captions (5.2:1) */
+  --color-ink-soft: #4a4a66; /* secondary text (8.2:1 on panel) */
+  --color-ink-faint: #6b6a80; /* captions (5.0:1 on panel, 4.8:1 on cream) */
   --color-line: #e8d9bf; /* hairlines, perforations */
   --color-line-strong: #8f8670; /* input borders (3.4:1) */
 
@@ -27,7 +27,7 @@
   --color-on-primary: #fbf3e4;
   --color-primary-soft: #e3e6f4;
   --color-palm: #d9600f; /* palm oil: focus ring, markers (non-text) */
-  --color-palm-ink: #a4430a; /* palm oil for text (6.1:1) */
+  --color-palm-ink: #a4430a; /* palm oil for text (6.0:1 on panel) */
   --color-palm-soft: #fde4cc;
   --color-pepper: #b3261e; /* errors, "need" */
   --color-pepper-soft: #fbe1dd;
