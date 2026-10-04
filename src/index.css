@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* Dark mode follows <html data-theme="dark">, set by index.html and useTheme */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+  Design tokens. Each one becomes a CSS variable (--color-pot) AND a
+  Tailwind utility (bg-pot, text-ink-soft, border-line, font-display...).
+
+  The look: a Lagos market stall. Adire indigo cloth, palm-oil orange,
+  pepper red, ripe-plantain yellow and a sun-faded cream. Cards are
+  printed like market tickets with a perforated edge.
+  Dark mode is the same market at night: indigo sky, lamplit orange.
+*/
+@theme {
+  --color-cream: #fbf3e4; /* page background */
+  --color-panel: #fffaf1; /* cards */
+  --color-panel-2: #f3e7d2; /* recessed: inputs, hover, skeletons */
+  --color-ink: #1b1d3a; /* main text: indigo-black */
+  --color-ink-soft: #4a4a66; /* secondary text (8.4:1 on panel) */
+  --color-ink-faint: #6b6a80; /* captions (5.2:1) */
+  --color-line: #e8d9bf; /* hairlines, perforations */
+  --color-line-strong: #8f8670; /* input borders (3.4:1) */
+
+  --color-primary: #22306e; /* adire indigo: primary buttons, active nav */
+  --color-primary-hover: #1a2558;
+  --color-on-primary: #fbf3e4;
+  --color-primary-soft: #e3e6f4;
+  --color-palm: #d9600f; /* palm oil: focus ring, markers (non-text) */
+  --color-palm-ink: #a4430a; /* palm oil for text (6.1:1) */
+  --color-palm-soft: #fde4cc;
+  --color-pepper: #b3261e; /* errors, "need" */
+  --color-pepper-soft: #fbe1dd;
+  --color-plantain: #f2c14e; /* highlights, house badge */
+  --color-plantain-soft: #fcefc9;
+  --color-leaf: #2e6b3a; /* "have", success */
+  --color-leaf-soft: #dcefdc;
+
+  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, ui-serif, serif;
+
+  --shadow-ticket: 0 1px 0 rgb(27 29 58 / 0.05), 0 6px 18px -8px rgb(27 29 58 / 0.18);
+  --shadow-pop: 0 18px 44px rgb(27 29 58 / 0.25);
+
+  --animate-shimmer: shimmer 1.4s ease-in-out infinite;
+  --animate-fade-in: fade-in 200ms ease-out;
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Dark mode: same variable names, new values */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-cream: #0f1129;
+  --color-panel: #181b3b;
+  --color-panel-2: #23274d;
+  --color-ink: #f7efe0;
+  --color-ink-soft: #cbc4d8;
+  --color-ink-faint: #a29db8;
+  --color-line: #2e3260;
+  --color-line-strong: #7a7aa0;
+
+  --color-primary: #ffa35c; /* in the dark, the lamplit orange leads */
+  --color-primary-hover: #ffb87e;
+  --color-on-primary: #1b1206;
+  --color-primary-soft: #2b2f5c;
+  --color-palm: #ff9a4d;
+  --color-palm-ink: #ffb37a;
+  --color-palm-soft: #43260f;
+  --color-pepper: #ff8a7f;
+  --color-pepper-soft: #47201d;
+  --color-plantain: #f5cc66;
+  --color-plantain-soft: #3d3215;
+  --color-leaf: #7fd08e;
+  --color-leaf-soft: #17361f;
+
+  --shadow-ticket: 0 1px 0 rgb(0 0 0 / 0.35);
+  --shadow-pop: 0 18px 48px rgb(0 0 0 / 0.6);
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+
+  /* One visible focus style for every interactive element */
+  :focus-visible {
+    outline: 3px solid var(--color-palm);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-plantain-soft);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+    Adire pattern: indigo cloth with resist-dyed dots and stripes,
+    drawn with gradients so it costs no image download.
+  */
+  .adire {
+    background-color: #22306e;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgb(251 243 228 / 0.18) 2.2px, transparent 2.6px),
+      radial-gradient(circle at 50% 50%, rgb(251 243 228 / 0.1) 5px, transparent 5.5px),
+      repeating-linear-gradient(135deg, transparent 0 22px, rgb(251 243 228 / 0.06) 22px 24px);
+    background-size:
+      18px 18px,
+      36px 36px,
+      auto;
+    background-position:
+      0 0,
+      9px 9px,
+      0 0;
+  }
+
+  /*
+    Market ticket: a perforated tear line with two half-circle notches.
+    Put .ticket-tear on the divider between the photo and the stub.
+  */
+  .ticket-tear {
+    position: relative;
+    border-top: 2px dashed var(--color-line);
+  }
+  .ticket-tear::before,
+  .ticket-tear::after {
+    content: "";
+    position: absolute;
+    top: -9px;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    background: var(--color-cream);
+  }
+  .ticket-tear::before {
+    left: -9px;
+  }
+  .ticket-tear::after {
+    right: -9px;
+  }
+}
