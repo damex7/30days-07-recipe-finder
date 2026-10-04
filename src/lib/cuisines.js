@@ -117,3 +117,8 @@ export function areaInCuisine(area, cuisine) {
   if (cuisine.id === 'african') return AFRICAN_LABELS.has(area)
   return area === cuisine.label
 }
+
+/** "French" -> the French cuisine entry, for linking a recipe's area to Browse. */
+export function findCuisineByLabel(label) {
+  return CUISINES.find((c) => c.label === label) ?? null
+}
