@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useMemo } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage.js'
+import { findLocalRecipe } from '../data/localRecipes.js'
 
 /*
   Favourites, saved in localStorage. We store a small summary of each
@@ -25,8 +26,16 @@ const summarise = (r) => ({
   complete: false,
 })
 
+// House recipes ship with the app, so show their current picture rather
+// than whichever one was saved (older saves hold the illustrated tile).
+const withCurrentImage = (f) => {
+  const house = f.origin === 'house' && findLocalRecipe(f.id)
+  return house ? { ...f, image: house.image, thumb: house.thumb } : f
+}
+
 export function FavouritesProvider({ children }) {
-  const [favourites, setFavourites] = useLocalStorage('pepperpot-favourites', [])
+  const [stored, setFavourites] = useLocalStorage('pepperpot-favourites', [])
+  const favourites = useMemo(() => stored.map(withCurrentImage), [stored])
 
   const isFavourite = useCallback((id) => favourites.some((f) => f.id === id), [favourites])
 

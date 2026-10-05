@@ -50,7 +50,7 @@ function RecipeView({ recipe }) {
   const haveCount = checked.filter((i) => i.have && !i.staple).length
   const countable = checked.filter((i) => !i.staple).length
   const cuisine = findCuisineByLabel(recipe.area)
-  const isArt = recipe.origin === 'house'
+  const isArt = recipe.image?.startsWith('data:')
 
   function addNeedsToList() {
     const n = addItems(need, recipe)
@@ -61,16 +61,19 @@ function RecipeView({ recipe }) {
     <article className="space-y-8">
       {/* Header */}
       <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end">
-        <div className="relative overflow-hidden rounded-3xl shadow-ticket">
-          <SafeImage
-            src={recipe.image}
-            thumb={recipe.thumb}
-            eager
-            sizes="(min-width: 1024px) 600px, 100vw"
-            alt={isArt ? `Illustration of ${recipe.name} in a bowl` : `Photo of ${recipe.name}`}
-            className="aspect-[4/3] w-full"
-          />
-        </div>
+        <figure>
+          <div className="relative overflow-hidden rounded-3xl shadow-ticket">
+            <SafeImage
+              src={recipe.image}
+              thumb={recipe.thumb}
+              eager
+              sizes="(min-width: 1024px) 600px, 100vw"
+              alt={isArt ? `Illustration of ${recipe.name} in a bowl` : `Photo of ${recipe.name}`}
+              className="aspect-[4/3] w-full"
+            />
+          </div>
+          {recipe.credit && <PhotoCredit credit={recipe.credit} />}
+        </figure>
 
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -245,6 +248,25 @@ function RecipeView({ recipe }) {
         </div>
       </div>
     </article>
+  )
+}
+
+// CC BY-SA asks for the author, the licence and a link back to the source.
+function PhotoCredit({ credit }) {
+  return (
+    <figcaption className="mt-2 px-1 text-xs text-ink-faint">
+      Photo:{' '}
+      <a href={credit.source} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-ink">
+        {credit.author}
+        <span className="sr-only"> on Wikimedia Commons (opens in a new tab)</span>
+      </a>
+      ,{' '}
+      <a href={credit.licenseUrl} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-ink">
+        {credit.license}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+      , resized
+    </figcaption>
   )
 }
 

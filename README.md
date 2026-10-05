@@ -89,7 +89,8 @@ data/localRecipes.js  (already in the clean shape) ─────┘    merge, 
 | `Promise.all` and intersection for combined filters | [src/lib/recipes.js](src/lib/recipes.js) (`browse`) |
 | Union of several queries (African cuisine) | [src/lib/recipes.js](src/lib/recipes.js) (`fetchCuisine`) |
 | Nigerian house recipes in the clean shape | [src/data/localRecipes.js](src/data/localRecipes.js) |
-| Illustrated SVG tiles for house recipes | [src/data/dishArt.js](src/data/dishArt.js) |
+| House recipe photos (Wikimedia Commons, CC BY-SA) and their credits | [src/data/dishPhotos.js](src/data/dishPhotos.js), [public/dishes/](public/dishes/) |
+| Illustrated SVG tiles, the fallback for a dish with no photo | [src/data/dishArt.js](src/data/dishArt.js) |
 | Cuisine snapshot (country names, Nigerian, African) | [src/lib/cuisines.js](src/lib/cuisines.js) |
 | Nigerian pantry words and aliases (pepper → scotch bonnet) | [src/lib/pantry.js](src/lib/pantry.js) |
 | Loading / error / retry state with request cancelling | [src/hooks/useAsync.js](src/hooks/useAsync.js) |
@@ -109,6 +110,10 @@ data/localRecipes.js  (already in the clean shape) ─────┘    merge, 
 ## Stack
 
 Vite, React 19 (JavaScript), Tailwind CSS v4 (`@tailwindcss/vite`, tokens in `@theme`) and react-router-dom. No other libraries.
+
+## Photo credits
+
+The house recipe photos come from [Wikimedia Commons](https://commons.wikimedia.org/) and are used under Creative Commons Attribution-ShareAlike licences (CC BY-SA 2.0 and 4.0). They were resized for the web. Each recipe page credits its photographer and links to the original; the full list is in [src/data/dishPhotos.js](src/data/dishPhotos.js).
 
 ## Ideas for later
 

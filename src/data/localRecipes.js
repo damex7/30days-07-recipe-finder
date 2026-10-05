@@ -1,4 +1,5 @@
 import { dishArt } from './dishArt.js'
+import { dishPhoto } from './dishPhotos.js'
 
 /*
   House recipes: Nigerian dishes TheMealDB doesn't have (it lists a
@@ -14,13 +15,14 @@ import { dishArt } from './dishArt.js'
   levels vary from house to house.
 */
 // Written as [name, measure] pairs to keep this file readable; expanded to the clean shape here.
+// A dish with no photo in dishPhotos.js falls back to its illustrated tile.
 function house({ slug, art, ingredients, ...recipe }) {
-  const image = dishArt(art)
+  const tile = dishArt(art)
+  const photo = dishPhoto(slug) ?? { image: tile, thumb: tile, credit: null }
   return {
     id: `house-${slug}`,
     area: 'Nigerian',
-    image,
-    thumb: image,
+    ...photo,
     youtube: null,
     source: null,
     origin: 'house',

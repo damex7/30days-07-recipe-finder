@@ -13,6 +13,7 @@ import { cuisineLabel } from './cuisines.js'
   {
     id, name, category, area,
     image, thumb,                  // full photo + small version (or null)
+    credit?,                       // house photos only: { author, license, licenseUrl, source }
     tags: [string],
     ingredients: [{ name, measure }],
     steps: [string],

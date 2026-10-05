@@ -1,7 +1,6 @@
 /*
-  Illustrated tiles for house recipes. We have no photos of our own, and
-  hotlinking someone else's would be borrowing their work, so each dish
-  gets a small SVG: adire dots on a coloured cloth and a bowl seen from
+  Illustrated tiles for house recipes, used when a dish has no photo in
+  dishPhotos.js. Each dish gets a small SVG: adire dots on a coloured cloth and a bowl seen from
   slightly above, filled with the food in the dish's own colours. It's
   returned as a data: URI, so it travels through the same `image` field
   as an API photo and no component needs to know the difference.
