@@ -1,3 +1,4 @@
+import { Icon } from './Icon.jsx'
 import { cx } from '../lib/cx.js'
 
 /** Marks recipes from our own collection. API recipes get no badge. */
@@ -10,7 +11,7 @@ export function SourceBadge({ recipe, className }) {
         className,
       )}
     >
-      <span aria-hidden="true">★</span> House recipe
+      <Icon name="star" className="size-3.5" /> House recipe
     </span>
   )
 }

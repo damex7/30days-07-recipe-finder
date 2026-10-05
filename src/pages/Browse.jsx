@@ -121,7 +121,7 @@ function SearchBox({ initial, onSearch }) {
         onChange={(e) => setText(e.target.value)}
         placeholder="Search by name, e.g. jollof, curry, soup"
         enterKeyHint="search"
-        className="min-w-0 flex-1 rounded-2xl border-2 border-line-strong bg-panel px-4 py-3 text-lg outline-none focus:border-palm"
+        className="min-w-0 flex-1 rounded-2xl border-2 border-line-strong bg-panel px-4 py-3 text-lg outline-none transition-shadow focus:border-palm focus:ring-4 focus:ring-palm/30"
       />
       <button type="submit" className="flex items-center gap-2 rounded-2xl bg-primary px-4 font-bold text-on-primary hover:bg-primary-hover sm:px-6">
         <Icon name="search" />
@@ -153,14 +153,14 @@ function CategoryPicker({ state, value, onChange }) {
                 aria-pressed={value === c}
                 onClick={() => onChange(c)}
                 className={cx(
-                  'shrink-0 rounded-full border-2 px-3.5 py-1.5 font-bold transition-colors',
+                  'min-h-11 shrink-0 rounded-full border-2 px-4 font-bold transition-colors',
                   value === c ? 'border-primary bg-primary text-on-primary' : 'border-line-strong hover:bg-panel-2',
                 )}
               >
                 {c}
               </button>
             ) : (
-              <span key={i} className="h-9 w-20 shrink-0 animate-shimmer rounded-full bg-panel-2" />
+              <span key={i} className="h-11 w-20 shrink-0 animate-shimmer rounded-full bg-panel-2" />
             ),
           )}
         </div>
@@ -219,7 +219,7 @@ function Results({ state, q, category, cuisine, setFilter }) {
   }
 
   return (
-    <div className={status === 'loading' ? 'opacity-60 transition-opacity' : undefined}>
+    <div className={cx('transition-opacity', status === 'loading' && 'opacity-60')}>
       <div className="mb-4 space-y-2" aria-live="polite">
         {failed.length > 0 && (
           <p className="flex gap-2 rounded-xl bg-plantain-soft px-4 py-3">

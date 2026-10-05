@@ -92,7 +92,7 @@ export function IngredientInput({ chips, onChange }) {
   return (
     <div className="relative">
       <div
-        className="flex flex-wrap items-center gap-2 rounded-2xl border-2 border-line-strong bg-panel p-2 focus-within:border-palm"
+        className="flex flex-wrap items-center gap-2 rounded-2xl border-2 border-line-strong bg-panel p-2 transition-shadow focus-within:border-palm focus-within:ring-4 focus-within:ring-palm/30"
         onClick={() => inputRef.current?.focus()}
       >
         <ul className="contents" aria-label="Your ingredients">

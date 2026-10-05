@@ -68,7 +68,7 @@ export default function Home() {
 
         <div className="flex flex-wrap items-center gap-2 text-sm">
           {chips.length ? (
-            <button type="button" onClick={() => setChips([])} className="rounded-full px-3 py-1.5 font-bold text-ink-soft underline-offset-4 hover:underline">
+            <button type="button" onClick={() => setChips([])} className="min-h-11 rounded-full px-3 font-bold text-ink-soft underline-offset-4 hover:underline">
               Clear all
             </button>
           ) : (
@@ -79,7 +79,7 @@ export default function Home() {
                   key={set.join()}
                   type="button"
                   onClick={() => setChips(set)}
-                  className="rounded-full border-2 border-dashed border-line-strong px-3 py-1 font-bold text-ink-soft hover:border-palm hover:text-ink"
+                  className="min-h-11 rounded-full border-2 border-dashed border-line-strong px-3.5 font-bold text-ink-soft hover:border-palm hover:text-ink"
                 >
                   {set.join(' + ')}
                 </button>
@@ -115,7 +115,7 @@ function Results({ chips, status, data, error, retry, onRemove }) {
   const updating = status === 'loading'
 
   return (
-    <div className={updating ? 'opacity-60 transition-opacity' : undefined}>
+    <div className={updating ? 'opacity-60 transition-opacity' : 'transition-opacity'}>
       <div className="mb-4 space-y-2" aria-live="polite">
         {failed.length > 0 && (
           <Notice tone="warn">

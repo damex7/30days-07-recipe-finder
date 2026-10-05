@@ -199,7 +199,7 @@ function Steps({ recipe }) {
           <Icon name="left" className="size-6" /> Back
         </button>
         {done ? (
-          <Link to={`/recipe/${recipe.id}`} className="flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-xl font-bold text-on-primary hover:bg-primary-hover">
+          <Link to={`/recipe/${recipe.id}`} className="press flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-xl font-bold text-on-primary hover:bg-primary-hover">
             Done <Icon name="check" className="size-6" />
           </Link>
         ) : (

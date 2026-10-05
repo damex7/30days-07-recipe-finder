@@ -60,7 +60,7 @@ export function Layout({ badges = {} }) {
           <div className="ml-auto flex items-center gap-2">
             <Link
               to="/surprise"
-              className="flex items-center gap-2 rounded-full bg-[#f2c14e] px-3 py-1.5 text-sm font-bold text-[#1b1d3a] hover:bg-[#f5cc66]"
+              className="press flex min-h-11 items-center gap-2 rounded-full bg-[#f2c14e] px-3.5 text-sm font-bold text-[#1b1d3a] hover:bg-[#f5cc66] max-[399px]:min-w-11 max-[399px]:justify-center"
             >
               <Icon name="dice" className="size-4" />
               <span className="max-[399px]:sr-only">Surprise me</span>
@@ -116,7 +116,7 @@ export function Layout({ badges = {} }) {
 
 function Badge({ count }) {
   return (
-    <span className="grid min-w-5 place-items-center rounded-full bg-[#b3261e] px-1 text-[0.7rem] leading-5 font-bold text-white">
+    <span className="grid min-w-5 place-items-center rounded-full bg-[#b3261e] px-1 text-xs leading-5 font-bold text-white">
       {count}
       <span className="sr-only"> items</span>
     </span>

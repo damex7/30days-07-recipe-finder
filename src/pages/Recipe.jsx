@@ -107,7 +107,7 @@ function RecipeView({ recipe }) {
             {recipe.steps.length > 0 && (
               <Link
                 to={`/recipe/${recipe.id}/cook`}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-lg font-bold text-on-primary hover:bg-primary-hover"
+                className="press inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-lg font-bold text-on-primary hover:bg-primary-hover"
               >
                 <Icon name="flame" /> Start cooking
               </Link>
@@ -154,7 +154,7 @@ function RecipeView({ recipe }) {
                   <button
                     type="button"
                     onClick={() => setPantry([...pantry, ing.name.toLowerCase()])}
-                    className="shrink-0 rounded-full px-2 py-1 text-xs font-bold text-ink-faint hover:bg-panel-2 hover:text-ink"
+                    className="-my-2 min-h-11 shrink-0 rounded-full px-3 text-xs font-bold text-ink-faint hover:bg-panel-2 hover:text-ink"
                   >
                     I have it
                   </button>

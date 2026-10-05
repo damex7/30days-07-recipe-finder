@@ -121,7 +121,7 @@ export default function Shopping() {
               type="button"
               onClick={() => remove(item.key)}
               aria-label={`Remove ${item.name}`}
-              className="grid size-9 shrink-0 place-items-center rounded-full text-ink-faint hover:bg-panel-2 hover:text-pepper"
+              className="-my-1 grid size-11 shrink-0 place-items-center rounded-full text-ink-faint hover:bg-panel-2 hover:text-pepper"
             >
               <Icon name="trash" className="size-4.5" />
             </button>

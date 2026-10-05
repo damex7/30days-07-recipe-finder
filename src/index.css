@@ -120,6 +120,19 @@
     border-radius: 6px;
   }
 
+  /*
+    Press feedback: on a phone there's no hover, so a tap needs its own
+    response. Our pressed state replaces the grey tap flash.
+  */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled):active,
+  .press:active {
+    transform: scale(0.97);
+  }
+
   ::selection {
     background: var(--color-plantain-soft);
     color: var(--color-ink);

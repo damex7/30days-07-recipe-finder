@@ -13,8 +13,10 @@ export function FavouriteButton({ recipe, className, withLabel = false }) {
       aria-pressed={saved}
       aria-label={withLabel ? undefined : `Save ${recipe.name}`}
       className={cx(
-        'inline-flex items-center gap-2 rounded-full font-bold transition-colors',
-        withLabel ? 'border-2 border-line-strong px-4 py-2 hover:bg-panel-2' : 'grid size-10 place-items-center bg-panel/90 shadow backdrop-blur hover:bg-panel',
+        'rounded-full font-bold transition-colors',
+        withLabel
+          ? 'inline-flex items-center gap-2 border-2 border-line-strong px-4 py-2 hover:bg-panel-2'
+          : 'grid size-11 place-items-center bg-panel/90 shadow backdrop-blur hover:bg-panel',
         saved && 'text-pepper',
         className,
       )}
