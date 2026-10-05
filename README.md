@@ -11,7 +11,7 @@ Tell it _"I have rice, tomatoes and chicken"_ and it ranks recipes by how many o
 - **Cook with what I have:** add ingredients as chips, with suggestions from TheMealDB's ~1,000 ingredients plus a Nigerian pantry list (palm oil, egusi, crayfish, iru, ugu…). Each card shows "Uses 3 of your 4 ingredients" and how many more you'd need to buy.
 - **Browse:** search by name, filter by category and cuisine, or combine all three. Nigerian and African are featured cuisines.
 - **Recipe page:** photo, ingredients marked **Have**, **Need** or **Staple** against your pantry, numbered steps, and the YouTube video if there is one.
-- **Cook mode:** full-screen, large text, one step at a time, with Back/Next buttons and ← → keys. It keeps the screen awake while you cook.
+- **Cook mode:** full-screen, large text, one step at a time, with Back/Next buttons and ← → keys. It keeps the screen awake while you cook. When a step mentions a time ("simmer for 20 minutes") there's a one-tap timer for it, and you can set your own; several timers can run at once and they ring when done.
 - **Favourites and shopping list,** saved on your device. The shopping list merges duplicates, lets you tick items off, and can be shared or copied as text.
 - **Surprise me:** a random recipe, about one in four from the house kitchen.
 - **Shareable URLs:** your ingredients, search and filters live in the URL, e.g. `/?i=rice,tomato,chicken` or `/browse?c=Seafood&a=spanish`.
@@ -97,6 +97,7 @@ data/localRecipes.js  (already in the clean shape) ─────┘    merge, 
 | State in the URL (ingredients, search, filters, cook step) | [src/lib/urlState.js](src/lib/urlState.js), [src/pages/Home.jsx](src/pages/Home.jsx), [src/pages/Browse.jsx](src/pages/Browse.jsx) |
 | Screen Wake Lock API | [src/hooks/useWakeLock.js](src/hooks/useWakeLock.js) |
 | Cook mode (keyboard, full screen, one step at a time) | [src/pages/CookMode.jsx](src/pages/CookMode.jsx) |
+| Step timers: times found in the step text, several at once, Web Audio alarm | [src/lib/timers.js](src/lib/timers.js), [src/hooks/useCookTimers.js](src/hooks/useCookTimers.js), [src/components/CookTimers.jsx](src/components/CookTimers.jsx), [src/lib/alarm.js](src/lib/alarm.js) |
 | localStorage persistence (synced across tabs) | [src/hooks/useLocalStorage.js](src/hooks/useLocalStorage.js), [src/lib/storage.js](src/lib/storage.js) |
 | Favourites | [src/context/FavouritesContext.jsx](src/context/FavouritesContext.jsx), [src/pages/Favourites.jsx](src/pages/Favourites.jsx) |
 | Shopping list merging, Web Share API, clipboard | [src/context/ShoppingContext.jsx](src/context/ShoppingContext.jsx), [src/pages/Shopping.jsx](src/pages/Shopping.jsx) |
@@ -119,7 +120,6 @@ The house recipe photos come from [Wikimedia Commons](https://commons.wikimedia.
 
 - Pantry quantities ("2 onions"), so the shopping list can subtract what you have.
 - Scale servings, converting measures as you go.
-- A step timer in cook mode that detects times in the text ("simmer for 20 minutes").
 - Offline support with a service worker, so saved recipes open without a connection.
 - Hands-free "next step" by voice in cook mode.
 - More house recipes, or family recipes submitted through a small backend.

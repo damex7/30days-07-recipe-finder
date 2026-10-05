@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { ErrorState } from '../components/States.jsx'
 import { Icon } from '../components/Icon.jsx'
+import { StepTimers, TimerTray } from '../components/CookTimers.jsx'
+import { useCookTimers } from '../hooks/useCookTimers.js'
 import { usePantry } from '../context/PantryContext.jsx'
 import { useAsync } from '../hooks/useAsync.js'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js'
@@ -58,13 +60,19 @@ function Steps({ recipe }) {
   const done = params.get('step') === 'done'
   const step = Math.min(Math.max(parseInt(params.get('step') ?? '1', 10) || 1, 1), total)
   const stepRef = useRef(null)
+  const cook = useCookTimers(recipe.id)
 
   const go = (next) => setParams(next === 'done' ? { step: 'done' } : { step: String(next) }, { replace: true })
-  const exit = () => navigate(`/recipe/${recipe.id}`)
+  const exit = () => {
+    // Timers keep counting while you're away and are back when you return, but the alarm can't ring
+    if (cook.anyRunning && !window.confirm('A timer is still running and won’t ring outside cook mode. Leave anyway?')) return
+    navigate(`/recipe/${recipe.id}`)
+  }
 
   useEffect(() => {
     function onKey(e) {
       if (e.altKey || e.ctrlKey || e.metaKey) return
+      if (e.target.closest?.('input, textarea, select')) return // typing minutes into the custom timer
       if (e.key === 'ArrowRight') {
         e.preventDefault()
         if (done) return
@@ -161,6 +169,8 @@ function Steps({ recipe }) {
               </>
             )}
           </div>
+          {/* Outside the live region, so moving steps doesn't read the buttons out too */}
+          {!done && <StepTimers key={step} step={step} text={recipe.steps[step - 1]} cook={cook} />}
         </main>
 
         {showIngredients && (
@@ -187,6 +197,8 @@ function Steps({ recipe }) {
           </aside>
         )}
       </div>
+
+      <TimerTray cook={cook} onGoToStep={go} />
 
       {/* Big controls, within thumb reach */}
       <nav aria-label="Steps" className="grid grid-cols-2 gap-3 border-t border-line bg-panel p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-5">
